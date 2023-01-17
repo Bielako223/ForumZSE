@@ -1,0 +1,89 @@
+﻿@page "/Create"
+@attribute [Authorize]
+@using ForumUI.Components
+@using ForumUI.Models
+@inject AuthenticationStateProvider authProvider
+@inject ICategoryData categoryData
+@inject IPostData postData
+@inject IuserData userData
+@inject NavigationManager navManager
+
+<h1 class="page-heading text-uppercase mb-4">Utwórz post</h1>
+
+<div class="row justify-content-center create-form">
+    <div class="col-xl-8 col-lg-10 form-layout">
+        <div class="close-button-section">
+            <button class="btn btn-close" @onclick="ClosePage"></button>
+        </div>
+        @if (categories is not null)
+        {
+            <EditForm Model="post" OnValidSubmit="CreatePost">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="input-section">
+                    <label class="form-label fw-bold text-uppercase" for="post-text">Tytuł posta</label>
+                    <div class="input-description">Tytuł będzie wyświetlany na stronie głównej.</div>
+                    <InputText class="form-control" id="post-text" @bind-Value="post.Post" />
+                </div>
+                <div class="input-section">
+                    <label class="form-label fw-bold text-uppercase" for="category">Kategorie</label>
+                    <div class="input-description">Wybierz jedną kategorię.</div>
+                    <div>
+                        <MyInputRadioGroup id="category" @bind-Value="post.CategoryId">
+                            @foreach (var c in categories)
+                            {
+                                <div class="radio-item-group">
+                                    <InputRadio Value="@c.Id" id="@c.Id" />
+                                    <label for="@c.Id">@c.CategoryName - @c.CategoryDescription</label>
+                                </div>
+                            }
+                        </MyInputRadioGroup>
+                    </div>
+                </div>
+                <div class="input-section">
+                    <label class="form-label fw-bold text-uppercase" for="description">Post</label>
+                    <div class="input-description">Opis posta.</div>
+                    <InputTextArea class="form-control" id="description" @bind-Value="post.Description" />
+                </div>
+                <div class="center-childeren">
+                    <button class="btn btn-main btn-lg text-uppercase" type="submit">Dodaj</button>
+                </div>
+            </EditForm>
+        }
+    </div>
+</div>
+
+
+@code {
+    private CreatePostModel post = new();
+    private List<CategoryModel> categories;
+    private UserModel loggedInUser;
+    protected async override Task OnInitializedAsync()
+    {
+        categories = await categoryData.GetAllCategories();
+        loggedInUser = await authProvider.GetUserFromAuth(userData);
+    }
+
+    private void ClosePage()
+    {
+        navManager.NavigateTo("/");
+    }
+
+    private async Task CreatePost()
+    {
+        PostModel s = new();
+        s.Post = post.Post;
+        s.Description = post.Description;
+        s.Author = new BasicUserModel(loggedInUser);
+        s.Category = categories.Where(c => c.Id == post.CategoryId).FirstOrDefault();
+        if (s.Category is null)
+        {
+            post.CategoryId = "";
+            return;
+        }
+
+        await postData.CreatePost(s);
+        post = new();
+        ClosePage();
+    }
+}

@@ -1,0 +1,20 @@
+﻿<AuthorizeView Policy="Admin">
+    <a class="login-link" href="/AdminApproval">
+        Admin
+    </a>
+</AuthorizeView>
+<AuthorizeView>
+    <Authorized>
+        <a class="login-link" href="/Profile">
+            Profil
+        </a>
+        <a class="login-link" href="MicrosoftIdentity/Account/SignOut">
+            Wyloguj się
+        </a>
+    </Authorized>
+    <NotAuthorized>
+        <a class="login-link" href="MicrosoftIdentity/Account/SignIn">
+            Zaloguj się
+        </a>
+    </NotAuthorized>
+</AuthorizeView>

@@ -1,0 +1,24 @@
+﻿@inject NavigationManager navManager
+
+<div class=" row justify-content-center">
+    <div class="col-xl-8 col-lg-10 form-layout">
+        <div class="row">
+            <div class="col-11">
+                <div class="fw-bold mb-2 fs-5">Authorization required</div>
+                <p>
+                    Brak dostepu. musisz się zalgować
+                </p>
+            </div>
+            <div class="col-1 close-button-section">
+                <button class="btn btn-close" @onclick="ClosePage"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private void ClosePage()
+    {
+        navManager.NavigateTo("/");
+    }
+}
