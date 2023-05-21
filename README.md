@@ -1,7 +1,7 @@
 ## ZSE school forum 
 
 Forum for my school, built with Blazor, MongoDB, Azure Authentication and Authorization. <br/>
-[forum-zse.azurewebsites.net](forum-zse.azurewebsites.net)
+[forum-zse.azurewebsites.net](https://forum-zse.azurewebsites.net/)
 
 ## How to Use the Project
 
