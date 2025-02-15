@@ -4,7 +4,6 @@ Forum for my school, built with Blazor, MongoDB, Azure Authentication and Author
 School Forum is a dynamic and easy-to-use app designed specifically for students and teachers
 to engage in discussions, share updates, and stay informed about school life. Whether it's official announcements, organizing events, or just casual conversations, School Forum brings the entire school community together in one place.<br/>
 
-[forum-zse.azurewebsites.net](https://forum-zse.azurewebsites.net/)
 <br/>
 ## Why Use School Forum?
 
@@ -18,7 +17,7 @@ to engage in discussions, share updates, and stay informed about school life. Wh
 - School administrators who want to centralize information and updates.
 - Join the conversation with School Forum – your school, your voice, all in one app!
 ## How to Use the Project
-
+> 📌 *Click on the images for better quality!*
 - On the main page as a guest, you can view posts and enter their details. However, to add a post or comment, you must sign in. You can filter searches by category, post title (name), and sort posts by the newest or most popular. 
   <img width="952" alt="mainWylog" src="https://github.com/user-attachments/assets/049d3527-c0de-45b6-99ee-59b6df5b13d2">
 - In the post details view, the title and content of the post are displayed. Logged-in users can add comments, which are visible to everyone, including guests.
